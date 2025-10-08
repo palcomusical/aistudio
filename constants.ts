@@ -12,7 +12,7 @@ export const initialLandingPageContent: LandingPageContent = {
   backgroundImageUrl: 'https://images.unsplash.com/photo-1590137782389-13e70a4a6c4c?q=80&w=1974&auto=format&fit=crop',
   colorPalette: {
     primary: '#4c0519', // Roughly red-900 for backgrounds
-    accent: '#facc15',  // amber-400
+    accent: '#facc15', // amber-400
     textPrimary: '#ffffff', // white
     textSecondary: '#d1d5db', // gray-300
   },

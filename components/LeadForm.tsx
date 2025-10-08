@@ -190,11 +190,11 @@ const LeadForm: React.FC = () => {
     }, 1500);
   };
 
-  const inputClasses = "w-full bg-red-950 border border-red-700 rounded-md py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 transition";
+  const inputClasses = "w-full bg-gray-800 border border-gray-600 rounded-md py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition";
   const selectedCountry = COUNTRIES.find(c => c.dialCode === formData.dialCode) || COUNTRIES[0];
 
   return (
-    <div className="bg-red-900 bg-opacity-70 backdrop-blur-sm p-6 sm:p-8 rounded-lg shadow-2xl border border-red-800">
+    <div className="bg-gray-900 bg-opacity-80 backdrop-blur-sm p-6 sm:p-8 rounded-lg shadow-2xl border border-gray-700">
       {submissionStatus === 'success' ? (
         <div className="text-center py-10">
            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-green-400 mx-auto mb-4" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -218,14 +218,14 @@ const LeadForm: React.FC = () => {
 
             <div className="flex items-stretch gap-0">
                 <div ref={countryDropdownRef} className="relative">
-                    <button type="button" onClick={() => setIsCountryDropdownOpen(prev => !prev)} className="h-full flex items-center justify-center bg-red-950 border border-r-0 border-red-700 rounded-l-md px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition">
+                    <button type="button" onClick={() => setIsCountryDropdownOpen(prev => !prev)} className="h-full flex items-center justify-center bg-gray-800 border border-r-0 border-gray-600 rounded-l-md px-3 text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition">
                         <span>{selectedCountry.flag}</span>
                         <span className="ml-2 text-sm">+{selectedCountry.dialCode}</span>
                     </button>
                     {isCountryDropdownOpen && (
                         <ul className="absolute bottom-full mb-2 w-56 max-h-60 overflow-y-auto bg-gray-900 border border-gray-700 rounded-md shadow-lg z-20">
                            {COUNTRIES.map(country => (
-                               <li key={country.code} onClick={() => handleCountrySelect(country.dialCode)} className="flex items-center gap-3 px-4 py-2 text-white hover:bg-red-800 cursor-pointer">
+                               <li key={country.code} onClick={() => handleCountrySelect(country.dialCode)} className="flex items-center gap-3 px-4 py-2 text-white hover:bg-red-500/10 cursor-pointer">
                                    <span>{country.flag}</span>
                                    <span className="flex-1">{country.name}</span>
                                    <span className="text-gray-400">+{country.dialCode}</span>
@@ -246,7 +246,7 @@ const LeadForm: React.FC = () => {
                     <input type="tel" name="cep" id="cep" placeholder="CEP (00000-000)" value={formData.cep} onChange={handleCepChange} maxLength={9} className={inputClasses} />
                      {isFetchingCep && (
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <svg className="animate-spin h-5 w-5 text-amber-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <svg className="animate-spin h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
@@ -265,7 +265,7 @@ const LeadForm: React.FC = () => {
                         </select>
                     </div>
                      <div>
-                        <select name="city" id="city" value={formData.city} onChange={handleChange} required disabled={!formData.state || cities.length === 0} className={`${inputClasses} appearance-none disabled:bg-red-800/50 disabled:cursor-not-allowed`}>
+                        <select name="city" id="city" value={formData.city} onChange={handleChange} required disabled={!formData.state || cities.length === 0} className={`${inputClasses} appearance-none disabled:bg-gray-700/50 disabled:cursor-not-allowed`}>
                             <option value="" disabled>Selecione a Cidade</option>
                              {cities.map(city => (
                             <option key={city.id} value={city.nome}>{city.nome}</option>
@@ -284,7 +284,7 @@ const LeadForm: React.FC = () => {
                         checked={formData.lgpdConsent}
                         onChange={handleChange}
                         required
-                        className="mt-1 h-4 w-4 rounded text-amber-500 bg-gray-700 border-gray-600 focus:ring-amber-500"
+                        className="mt-1 h-4 w-4 rounded text-red-600 bg-gray-700 border-gray-500 focus:ring-red-600"
                     />
                     <span className="text-xs text-gray-400">
                         Ao enviar, concordo que os dados fornecidos serão utilizados exclusivamente pela BomCorte para entrar em contato e oferecer informações sobre produtos e promoções.
@@ -292,7 +292,7 @@ const LeadForm: React.FC = () => {
                 </label>
             </div>
 
-            <button type="submit" disabled={isSubmitting || !formData.lgpdConsent} className="w-full bg-amber-500 text-gray-900 font-bold py-3 px-4 rounded-md hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-amber-500 transition-transform transform hover:scale-105 disabled:bg-amber-700/50 disabled:text-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+            <button type="submit" disabled={isSubmitting || !formData.lgpdConsent} className="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-red-600 transition-all transform hover:scale-105 disabled:bg-red-600/50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
               {isSubmitting ? (
                 <>
                   <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <h3 className="text-xl font-bold text-white mb-4 flex-grow">{name}</h3>
         <button
           onClick={handleScrollToForm}
-          className="w-full mt-auto bg-amber-500 text-gray-900 font-bold py-2 px-4 rounded-md hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-amber-500 transition"
+          className="w-full mt-auto bg-red-600 text-white font-bold py-2 px-4 rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-900 focus:ring-red-600 transition"
         >
           Consultar Oferta
         </button>
@@ -49,7 +49,7 @@ const ProductCatalog: React.FC<ProductCatalogProps> = ({ title, description, pro
   };
 
   return (
-    <section className="bg-red-950 py-16 sm:py-24">
+    <section className="py-16 sm:py-24" style={{ backgroundColor: '#Aa3437' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">

@@ -57,7 +57,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
       </div>
 
       {/* Second Fold: Info and Form */}
-      <div id="lead-form-section" className="bg-red-950 py-16 sm:py-24">
+      <div id="lead-form-section" className="py-16 sm:py-24" style={{ backgroundColor: '#Aa3437' }}>
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <main className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               
@@ -99,15 +99,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
         />
       )}
       
-      <footer className="bg-red-950 text-center py-6">
-        <p className="text-gray-500 text-sm">
+      <footer className="text-center py-6" style={{ backgroundColor: '#Aa3437' }}>
+        <p className="text-gray-300 text-sm">
           &copy; {new Date().getFullYear()} BomCorte. Todos os direitos reservados.
         </p>
         <div className="mt-2">
             <a 
                 href="/admin" 
                 onClick={(e) => handleNavigateClick(e, '/admin')}
-                className="text-xs text-gray-600 hover:text-amber-400 transition-colors"
+                className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
             >
                 Acesso Restrito
             </a>
