@@ -160,7 +160,7 @@ const LeadForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.lgpdConsent) {
         alert("Você precisa aceitar os termos de uso de dados para continuar.");
@@ -169,25 +169,42 @@ const LeadForm: React.FC = () => {
     setIsSubmitting(true);
     setSubmissionStatus('idle');
 
-    const cleanedData = {
+    const payload = {
         name: formData.name,
         email: formData.email,
-        whatsapp: formData.dialCode + formData.whatsapp.replace(/\D/g, ''),
+        whatsapp: formData.whatsapp.replace(/\D/g, ''),
+        dialCode: formData.dialCode,
         cep: formData.cep.replace(/\D/g, ''),
         state: formData.state,
         city: formData.city,
         lgpdConsent: formData.lgpdConsent,
+        ...utmParams
     };
 
-    const fullPayload = { ...cleanedData, ...utmParams, timestamp: new Date().toISOString() };
-    console.log('Submitting to n8n webhook:', fullPayload);
-    
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/leads.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        setSubmissionStatus('success');
+        setFormData(initialFormData);
+        setTimeout(() => setSubmissionStatus('idle'), 5000);
+      } else {
+        setSubmissionStatus('error');
+        alert('Erro ao enviar formulário. Tente novamente.');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar lead:', error);
+      setSubmissionStatus('error');
+      alert('Erro ao enviar formulário. Tente novamente.');
+    } finally {
       setIsSubmitting(false);
-      setSubmissionStatus('success');
-      setFormData(initialFormData);
-      setTimeout(() => setSubmissionStatus('idle'), 5000);
-    }, 1500);
+    }
   };
 
   const inputClasses = "w-full bg-gray-800 border border-gray-600 rounded-md py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition";
