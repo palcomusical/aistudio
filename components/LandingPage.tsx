@@ -2,6 +2,7 @@ import React from 'react';
 import LeadForm from './LeadForm';
 import ProductCatalog from './ProductCatalog';
 import { LandingPageContent } from '../types';
+import CountdownTimer from './CountdownTimer';
 
 interface LandingPageProps {
   content: LandingPageContent;
@@ -29,8 +30,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
     productSectionDescription, products 
   } = content;
 
-  const backgroundStyle = {
-    backgroundImage: `linear-gradient(rgba(20, 5, 5, 0.85), rgba(20, 5, 5, 0.95)), url('${backgroundImageUrl}')`
+  const countdownBackgroundStyle = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('${backgroundImageUrl}')`
   };
   
   const accentColorStyle = { color: colorPalette.accent };
@@ -44,41 +45,49 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
 
   return (
     <>
+      {/* First Fold: Countdown */}
       <div 
-        id="lead-form-section"
-        className="relative min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-cover bg-center bg-fixed"
-        style={backgroundStyle}
+        className="relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 bg-cover bg-center bg-fixed"
+        style={countdownBackgroundStyle}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-        
-        <main className="relative z-10 w-full max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          
-          <div className="text-center lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
-               {logoUrl ? <img src={logoUrl} alt="BomCorte Logo" className="h-10 object-contain" /> : <DynamicIcon icon='tool' className="w-10 h-10" style={accentColorStyle}/> }
-              <h2 className="text-xl font-bold tracking-wider uppercase" style={accentColorStyle}>BomCorte</h2>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight" style={textPrimaryStyle}>
-              {mainTitle}
-              <span className="block" style={accentColorStyle}>{highlightedTitle}</span>
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0" style={textSecondaryStyle}>
-              {description}
-            </p>
-            <div className="mt-8 flex justify-center lg:justify-start gap-4" style={{color: colorPalette.accent}}>
-               {features.map(feature => (
-                 <div key={feature.id} className="flex items-center gap-2">
-                    <DynamicIcon icon={feature.icon} className="h-5 w-5" />
-                    <span style={{ color: colorPalette.textSecondary }}>{feature.text}</span>
-                 </div>
-               ))}
-            </div>
-          </div>
+        <CountdownTimer />
+        <div className="absolute bottom-10 animate-bounce cursor-pointer" onClick={() => document.getElementById('lead-form-section')?.scrollIntoView({ behavior: 'smooth' })}>
+          <svg className="w-10 h-10 text-white opacity-50 hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+        </div>
+      </div>
 
-          <div>
-            <LeadForm />
-          </div>
-        </main>
+      {/* Second Fold: Info and Form */}
+      <div id="lead-form-section" className="bg-red-950 py-16 sm:py-24">
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <main className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
+                   {logoUrl ? <img src={logoUrl} alt="BomCorte Logo" className="h-10 object-contain" /> : <DynamicIcon icon='tool' className="w-10 h-10" style={accentColorStyle}/> }
+                  <h2 className="text-xl font-bold tracking-wider uppercase" style={accentColorStyle}>BomCorte</h2>
+                </div>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight" style={textPrimaryStyle}>
+                  {mainTitle}
+                  <span className="block" style={accentColorStyle}>{highlightedTitle}</span>
+                </h1>
+                <p className="mt-6 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0" style={textSecondaryStyle}>
+                  {description}
+                </p>
+                <div className="mt-8 flex justify-center lg:justify-start gap-4" style={{color: colorPalette.accent}}>
+                   {features.map(feature => (
+                     <div key={feature.id} className="flex items-center gap-2">
+                        <DynamicIcon icon={feature.icon} className="h-5 w-5" />
+                        <span style={{ color: colorPalette.textSecondary }}>{feature.text}</span>
+                     </div>
+                   ))}
+                </div>
+              </div>
+
+              <div>
+                <LeadForm />
+              </div>
+            </main>
+        </div>
       </div>
       
       {showProductSection && (

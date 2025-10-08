@@ -9,7 +9,7 @@ export const initialLandingPageContent: LandingPageContent = {
     { id: 'feat1', icon: 'check', text: 'Qualidade Profissional' },
     { id: 'feat2', icon: 'tag', text: 'Preços de Fábrica' },
   ],
-  backgroundImageUrl: 'https://images.unsplash.com/photo-1581888224552-36856f4d3c32?q=80&w=2070&auto=format&fit=crop',
+  backgroundImageUrl: 'https://images.unsplash.com/photo-1590137782389-13e70a4a6c4c?q=80&w=1974&auto=format&fit=crop',
   colorPalette: {
     primary: '#4c0519', // Roughly red-900 for backgrounds
     accent: '#facc15',  // amber-400
