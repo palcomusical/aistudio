@@ -1,36 +1,37 @@
 # BomCorte Black Friday Landing Page (PHP Version)
 
-This is a server-side PHP and MySQL version of the original React application.
+Esta é uma versão da aplicação com backend em PHP e banco de dados MySQL, projetada para ser implantada em servidores de hospedagem tradicionais.
 
-## Setup Instructions
+## Instruções de Instalação
 
-### 1. Prerequisites
-- A web server with PHP 7.4 or higher (e.g., Apache, Nginx).
-- A MySQL or MariaDB database server.
-- A tool to manage your database (e.g., phpMyAdmin).
+### 1. Pré-requisitos
+- Um servidor web com suporte a PHP 7.4 ou superior (ex: Apache).
+- Um servidor de banco de dados MySQL ou MariaDB.
+- Acesso ao gerenciador de banco de dados (ex: phpMyAdmin).
 
-### 2. Database Setup
-1. Create a new database in your MySQL server (e.g., `bomcorte_db`).
-2. Import the `database.sql` file into your new database. This will create all the necessary tables and insert default content.
+### 2. Configuração do Banco de Dados
+1. Crie um novo banco de dados no seu servidor MySQL (ex: `bomcorte_db`).
+2. Acesse o phpMyAdmin, selecione o banco de dados que você acabou de criar.
+3. Vá para a aba "Importar", selecione o arquivo `database.sql` deste projeto e execute a importação. Isso criará todas as tabelas necessárias e inserirá o conteúdo padrão e um usuário administrador.
 
-### 3. Application Configuration
-1. Open the `config.php` file.
-2. Update the database credentials (`DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`) to match your database setup.
+### 3. Configuração da Aplicação
+1. Abra o arquivo `config.php` em um editor de texto.
+2. Altere os valores de `DB_HOST`, `DB_NAME`, `DB_USER`, e `DB_PASS` para corresponder às credenciais do seu banco de dados criado no passo anterior.
 
-### 4. File Uploads
-1. Create a directory named `uploads` in the root of the project folder.
-2. Ensure your web server has write permissions for this `uploads/` directory. On Linux/macOS, you can often do this with `chmod 755 uploads`. This is where images for the logo, background, and products will be stored.
+### 4. Permissões para Upload de Arquivos
+1. Crie um diretório chamado `uploads` na pasta raiz do seu projeto (no mesmo nível que `index.php`).
+2. Dê permissão de escrita para o servidor neste diretório. Em servidores Linux, o comando comum é `chmod 755 uploads` ou, em alguns casos, `chmod 777 uploads`. Este diretório é essencial para que o painel de administração possa salvar as imagens do logo, fundo e produtos.
 
-### 5. Deployment
-1. Upload all files (`index.php`, `admin.php`, `config.php`, `README.md`, `database.sql`) and the `uploads/` directory to your web server.
-2. Remove all old `.tsx`, `.ts`, `.html`, and other React-related files.
+### 5. Implantação (Deployment)
+1. Faça o upload de todos os arquivos e da pasta `uploads/` para o diretório principal do seu site na sua hospedagem (geralmente `public_html` ou `www`).
+2. Certifique-se de remover todos os arquivos antigos da versão em React (.tsx, .ts, .html, etc.) para evitar conflitos.
 
-### 6. Accessing the Application
-- **Landing Page**: Navigate to `http://your-domain.com/index.php` or `http://your-domain.com/`.
-- **Admin Panel**: Navigate to `http://your-domain.com/admin.php`.
+### 6. Acessando a Aplicação
+- **Landing Page**: Navegue para o seu domínio (ex: `http://seusite.com/`).
+- **Painel Administrativo**: Navegue para `http://seusite.com/admin.php`.
 
-### Default Admin Login
+### Login Padrão do Administrador
 - **Email**: `admin@bomcorte.com`
-- **Password**: `password123`
+- **Senha**: `password123`
 
-It is highly recommended to change the default admin password immediately after your first login.
+**IMPORTANTE:** Por segurança, é altamente recomendável que você acesse o painel de administração e crie um novo usuário administrador com uma senha forte, e depois exclua o usuário padrão.
