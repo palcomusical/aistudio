@@ -38,6 +38,13 @@ const LandingPageEditor: React.FC<EditorProps> = ({ initialContent, onSave }) =>
     const { name, value, type } = e.target;
     const isCheckbox = type === 'checkbox';
     const checked = (e.target as HTMLInputElement).checked;
+    
+    // Ensure highlightedTitle is not undefined if it's being edited
+    if (name === 'productSectionHighlightedTitle' && value === undefined) {
+      setContent(prev => ({ ...prev, [name]: '' }));
+      return;
+    }
+
     setContent(prev => ({ ...prev, [name]: isCheckbox ? checked : value }));
   };
 
@@ -200,7 +207,10 @@ const LandingPageEditor: React.FC<EditorProps> = ({ initialContent, onSave }) =>
                 </label>
             </div>
             {content.showProductSection && (<>
-                <FormRow label="Título da Seção">
+                <FormRow label="Título da Seção em Destaque">
+                    <TextInput name="productSectionHighlightedTitle" value={content.productSectionHighlightedTitle || ''} onChange={handleChange} />
+                </FormRow>
+                 <FormRow label="Título da Seção (Restante)">
                     <TextInput name="productSectionTitle" value={content.productSectionTitle} onChange={handleChange} />
                 </FormRow>
                 <FormRow label="Descrição da Seção">

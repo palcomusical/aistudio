@@ -27,7 +27,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
   const { 
     mainTitle, highlightedTitle, description, features, backgroundImageUrl, 
     colorPalette, logoUrl, showProductSection, productSectionTitle, 
-    productSectionDescription, products 
+    productSectionHighlightedTitle, productSectionDescription, products 
   } = content;
 
   const countdownBackgroundStyle = {
@@ -57,7 +57,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
       </div>
 
       {/* Second Fold: Info and Form */}
-      <div id="lead-form-section" className="py-16 sm:py-24" style={{ backgroundColor: '#Aa3437' }}>
+      <div id="lead-form-section" className="py-16 sm:py-24" style={{ backgroundColor: colorPalette.primary }}>
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <main className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               
@@ -93,13 +93,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
       {showProductSection && (
          <ProductCatalog 
             title={productSectionTitle}
+            highlightedTitle={productSectionHighlightedTitle}
             description={productSectionDescription}
             products={products}
+            backgroundColor={colorPalette.primary}
             accentColor={colorPalette.accent}
         />
       )}
       
-      <footer className="text-center py-6" style={{ backgroundColor: '#Aa3437' }}>
+      <footer className="text-center py-6" style={{ backgroundColor: colorPalette.primary }}>
         <p className="text-gray-300 text-sm">
           &copy; {new Date().getFullYear()} BomCorte. Todos os direitos reservados.
         </p>

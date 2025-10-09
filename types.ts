@@ -1,5 +1,3 @@
-// FIX: Removed the self-import of Region which was causing a circular dependency and a conflict with the local declaration.
-
 export enum Region {
   SUL = 'Sul',
   SUDESTE = 'Sudeste',
@@ -111,6 +109,7 @@ export interface LandingPageContent {
   colorPalette: ColorPalette;
   showProductSection: boolean;
   productSectionTitle: string;
+  productSectionHighlightedTitle: string;
   productSectionDescription: string;
   products: Product[];
 }

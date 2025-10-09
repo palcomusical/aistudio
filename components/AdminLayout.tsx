@@ -1,6 +1,7 @@
 
 
 
+
 import React, { useState } from 'react';
 import CampaignDashboard from './CampaignDashboard';
 import AdminPanel from './AdminPanel';
@@ -14,7 +15,6 @@ type View = 'dashboard' | 'admin' | 'editor' | 'users';
 interface AdminLayoutProps {
   content: LandingPageContent;
   onSave: (newContent: LandingPageContent) => void;
-  // FIX: Changed the type of the `view` parameter to match the app-level navigation views.
   onNavigate: (view: 'home' | 'landing' | 'admin') => void;
 }
 

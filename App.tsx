@@ -1,5 +1,6 @@
 
 
+
 import React, { useState, useEffect } from 'react';
 import HomePage from './components/HomePage';
 import AdminLayout from './components/AdminLayout';
@@ -37,7 +38,6 @@ const App: React.FC = () => {
       if (savedContent) {
         setLandingPageContent(JSON.parse(savedContent));
       }
-// FIX: Added curly braces to the catch block to fix a syntax error that was breaking the component's scope.
     } catch (error) {
       console.error("Failed to parse landing page content from localStorage", error);
     }

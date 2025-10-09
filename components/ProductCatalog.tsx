@@ -30,26 +30,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
 interface ProductCatalogProps {
   title: string;
+  highlightedTitle: string;
   description: string;
   products: Product[];
+  backgroundColor: string;
   accentColor: string;
 }
 
-const ProductCatalog: React.FC<ProductCatalogProps> = ({ title, description, products, accentColor }) => {
-  // A simple way to inject a span with the accent color into the title
+const ProductCatalog: React.FC<ProductCatalogProps> = ({ title, highlightedTitle, description, products, backgroundColor, accentColor }) => {
   const renderTitle = () => {
-    const parts = title.split(/(\sImperdíveis|\sImbatíveis|\sExclusivas)/i);
     return (
       <>
-        {parts[0]}
-        {parts[1] && <span style={{ color: accentColor }}>{parts[1]}</span>}
-        {parts.slice(2).join('')}
+        <span style={{ color: accentColor }}>{highlightedTitle}</span> {title}
       </>
     );
   };
 
   return (
-    <section className="py-16 sm:py-24" style={{ backgroundColor: '#Aa3437' }}>
+    <section className="py-16 sm:py-24" style={{ backgroundColor }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">

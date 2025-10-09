@@ -11,13 +11,14 @@ export const initialLandingPageContent: LandingPageContent = {
   ],
   backgroundImageUrl: 'https://images.unsplash.com/photo-1590137782389-13e70a4a6c4c?q=80&w=1974&auto=format&fit=crop',
   colorPalette: {
-    primary: '#4c0519', // Roughly red-900 for backgrounds
+    primary: '#b91c1c', // red-700
     accent: '#facc15', // amber-400
     textPrimary: '#ffffff', // white
     textSecondary: '#d1d5db', // gray-300
   },
   showProductSection: true,
-  productSectionTitle: 'Ofertas Imperdíveis da Black Friday',
+  productSectionTitle: 'da Black Friday',
+  productSectionHighlightedTitle: 'Ofertas Imperdíveis',
   productSectionDescription: 'Confira uma seleção de nossas melhores ferramentas com descontos exclusivos. A hora de equipar sua oficina é agora!',
   products: [
     {
