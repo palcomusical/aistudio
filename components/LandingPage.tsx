@@ -6,7 +6,7 @@ import CountdownTimer from './CountdownTimer';
 
 interface LandingPageProps {
   content: LandingPageContent;
-  onNavigate: (href: string) => void;
+  onNavigate: (view: 'home' | 'landing' | 'admin') => void;
 }
 
 // Helper component for dynamic icons
@@ -38,9 +38,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
   const textPrimaryStyle = { color: colorPalette.textPrimary };
   const textSecondaryStyle = { color: colorPalette.textSecondary };
 
-  const handleNavigateClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavigateClick = (event: React.MouseEvent<HTMLAnchorElement>, view: 'home' | 'landing' | 'admin') => {
     event.preventDefault();
-    onNavigate(href);
+    onNavigate(view);
   };
 
   return (
@@ -105,11 +105,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ content, onNavigate }) => {
         </p>
         <div className="mt-2">
             <a 
-                href="/admin" 
-                onClick={(e) => handleNavigateClick(e, '/admin')}
+                href="/" 
+                onClick={(e) => handleNavigateClick(e, 'home')}
                 className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
             >
-                Acesso Restrito
+                Página Inicial
             </a>
         </div>
       </footer>

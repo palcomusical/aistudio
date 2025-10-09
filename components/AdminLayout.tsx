@@ -1,4 +1,6 @@
 
+
+
 import React, { useState } from 'react';
 import CampaignDashboard from './CampaignDashboard';
 import AdminPanel from './AdminPanel';
@@ -7,32 +9,27 @@ import UserManagement from './admin/UserManagement';
 import { useAuth } from '../contexts/AuthContext';
 import { LandingPageContent, UserRole } from '../types';
 
+type View = 'dashboard' | 'admin' | 'editor' | 'users';
+
 interface AdminLayoutProps {
   content: LandingPageContent;
   onSave: (newContent: LandingPageContent) => void;
+  // FIX: Changed the type of the `view` parameter to match the app-level navigation views.
+  onNavigate: (view: 'home' | 'landing' | 'admin') => void;
 }
 
-type View = 'dashboard' | 'admin' | 'editor' | 'users';
 
-const AdminLayout: React.FC<AdminLayoutProps> = ({ content, onSave }) => {
-  const { currentUser: authUser, logout } = useAuth();
+const AdminLayout: React.FC<AdminLayoutProps> = ({ content, onSave, onNavigate }) => {
+  const { currentUser, logout } = useAuth();
   const [currentView, setCurrentView] = useState<View>('dashboard');
 
-  // As requested, create a mock admin user to bypass login and keep the admin panel open.
-  const currentUser = authUser || {
-      id: 'mock-admin',
-      email: 'admin@bomcorte.com (mock)',
-      role: UserRole.ADMIN,
-  };
+  if (!currentUser) {
+    // This should not happen if the parent component is handling auth, but it's a safeguard.
+    return null;
+  }
 
   const handleLogout = () => {
-      if (authUser) {
-          logout();
-      } else {
-          // In a mock session, there's nothing to log out from.
-          // Reloading the page would just bring it back to this state.
-          alert("Você está em modo de visualização. Não há uma sessão real para encerrar.");
-      }
+      logout();
   }
 
   const renderView = () => {
@@ -66,11 +63,20 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ content, onSave }) => {
   const hasEditorPermissions = currentUser.role === UserRole.ADMIN || currentUser.role === UserRole.EDITOR;
 
   return (
-    <div className="bg-red-950 font-sans text-white overflow-x-hidden">
+    <div className="bg-red-950 font-sans text-white overflow-x-hidden min-h-screen">
       <div className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-12">
                 <div className="flex items-center gap-4">
+                     <button
+                        onClick={() => onNavigate('home')}
+                        className="bg-gray-800 p-2 rounded-full hover:bg-gray-700 transition"
+                        aria-label="Início"
+                     >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                           <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                        </svg>
+                     </button>
                      <div className="text-right sm:text-left">
                         <p className="text-sm font-bold text-white">{currentUser.email}</p>
                         <p className="text-xs text-amber-400">{currentUser.role}</p>

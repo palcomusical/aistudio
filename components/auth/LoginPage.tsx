@@ -3,9 +3,10 @@ import { useAuth } from '../../contexts/AuthContext';
 
 interface LoginPageProps {
     backgroundImageUrl: string;
+    onNavigate: (view: 'home' | 'landing' | 'admin') => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ backgroundImageUrl }) => {
+const LoginPage: React.FC<LoginPageProps> = ({ backgroundImageUrl, onNavigate }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -28,6 +29,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ backgroundImageUrl }) => {
     } finally {
       setIsLoggingIn(false);
     }
+  };
+  
+  const handleNavigateClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    onNavigate('home');
   };
 
   return (
@@ -89,6 +95,15 @@ const LoginPage: React.FC<LoginPageProps> = ({ backgroundImageUrl }) => {
              <div className="text-center mt-4">
                 <p className="text-xs text-gray-400">Use `admin@bomcorte.com` e senha `password123`</p>
             </div>
+        </div>
+        
+        <div className="mt-8 text-center">
+            <a href="/" onClick={handleNavigateClick} className="text-sm text-gray-300 hover:text-amber-400 transition-colors inline-flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                </svg>
+                Voltar para a página inicial
+            </a>
         </div>
     </div>
   );
