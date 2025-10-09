@@ -10,22 +10,6 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [react()],
-      build: {
-        outDir: 'dist',
-        assetsDir: 'assets',
-        rollupOptions: {
-          output: {
-            entryFileNames: 'assets/index.js',
-            chunkFileNames: 'assets/[name]-[hash].js',
-            assetFileNames: (assetInfo) => {
-              if (assetInfo.name === 'index.css') {
-                return 'assets/index.css';
-              }
-              return 'assets/[name]-[hash].[ext]';
-            }
-          }
-        }
-      },
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
